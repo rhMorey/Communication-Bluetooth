@@ -19,6 +19,8 @@ double status;
  pinMode(5,OUTPUT);
  pinMode(7,OUTPUT);
  pinMode(6,OUTPUT);
+ pinMode(12,OUTPUT);
+ pinMode(13,OUTPUT);
  }
 void loop()
  {
@@ -26,21 +28,25 @@ int status;
  if(BLE.available()){//vérifie si des données ont été envoyées depuis le moduleBLE
  status = BLE.read(); //Permet de lire les données reçues
  }
-if (status == 1) {if(((status)==(1))){
-        digitalWrite(4,1);
-        analogWrite(5,150);
+if (status == 1){if(((status)==(1))){
+        digitalWrite(12,LOW);
+        digitalWrite(13,HIGH);
+        digitalWrite(4,0);
+        analogWrite(5,250);
         digitalWrite(7,1);
-        analogWrite(6,0);
+        analogWrite(6,250);
     }}
 if (status == 2) {if(((status)==(2))){
+        digitalWrite(12,HIGH);
+        digitalWrite(13,LOW);
         digitalWrite(4,1);
         analogWrite(5,0);
-        digitalWrite(7,1);
+        digitalWrite(7,0);
         analogWrite(6,0);
     }}
 if (status == 4) {if(((status)==(4))){
         digitalWrite(4,0);
-        analogWrite(5,200);
+        analogWrite(5,150);
         digitalWrite(7,1);
         analogWrite(6,25);
     }}
@@ -48,8 +54,8 @@ if (status == 3) {if(((status)==(3))){
         digitalWrite(4,0);
         analogWrite(5,25);
         digitalWrite(7,1);
-        analogWrite(6,200);
-    }}
+        analogWrite(6,150);
+}}
 
 }
  void setupBleConnection() // Fonction paramétrant le module BLE
